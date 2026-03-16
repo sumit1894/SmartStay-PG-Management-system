@@ -2,9 +2,9 @@ import roomModel from "../roomModel/roomModel.js";
 
 export const getAllRooms = async (req, res) => {
     try {
-        const rooms=await roomModel.find();
+        const rooms = await roomModel.find().sort({ roomNumber: 1 });
         res.status(200).json({
-            totalRooms:rooms.length,
+            totalRooms: rooms.length,
             rooms
         })
     } catch (error) {

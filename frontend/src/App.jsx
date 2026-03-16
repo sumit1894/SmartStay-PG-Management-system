@@ -3,6 +3,8 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/Register";
 import { Toaster } from 'react-hot-toast';
 import { Dashboard } from "./pages/Dashboard";
+import { Rooms } from "./pages/Room";
+import { Tenants } from "./pages/Tenant";
 
 
 export const App = () => {
@@ -12,7 +14,9 @@ export const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/rooms" element={<Rooms/>} />
+        <Route path="/tenants" element={<Tenants/>}/>
       </Routes>
     </>
   )

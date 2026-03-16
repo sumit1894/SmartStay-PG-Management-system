@@ -9,12 +9,16 @@ const roomSchema = new mongoose.Schema({
     totalBeds: {
         type: Number,
         required: true,
-        min:1
+        min: 1
     },
     occupiedBeds: {
         type: Number,
         default: 0,
-        min:0
+        min: 0
+    },
+    rent: {
+        type: Number,
+        required: true,
     }
 }, { timestamps: true });
 

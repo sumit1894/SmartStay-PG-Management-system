@@ -1,38 +1,51 @@
 import roomModel from "../../Rooms/roomModel/roomModel.js";
 import tenantModel from "../tenantModel/tenantModel.js";
 
-
 export const createTenant = async (req, res) => {
     try {
-        const { name, phone, roomId, rentAmount } = req.body;
 
-        const room = await roomModel.findById(roomId);
+        const { name, phone, roomNumber, rent } = req.body;
+
+        // find specific room
+        const room = await roomModel.findOne({ roomNumber });
+
         if (!room) {
-            return res.statu(404).json({ message: "Room not found!" })
+            return res.status(404).json({
+                success: false,
+                message: "Room not found"
+            });
         }
 
+        // check if room full
         if (room.occupiedBeds >= room.totalBeds) {
-            return res.statu(400).json({ message: "Room is already full!" })
+            return res.status(400).json({
+                success: false,
+                message: "Room is already full!"
+            });
         }
 
         const tenant = new tenantModel({
             name,
             phone,
-            roomId,
-            rentAmount
+            roomNumber,
+            rent
         });
 
         await tenant.save();
 
+        // increase occupied beds
         room.occupiedBeds += 1;
-        await room.save()
+        await room.save();
 
         res.status(201).json({
+            success: true,
             message: "Tenant added successfully",
             tenant
         });
 
     } catch (error) {
-        res.statu(500).json({ error: error.message })
+        res.status(500).json({
+            message: error.message || "Something Error Found"
+        });
     }
-}
+};

@@ -8,37 +8,37 @@ export const getDashboardStats = async (req, res) => {
 
     try {
 
-        const totalRooms=await roomModel.countDocuments();
-        const totalTenants=await tenantModel.countDocuments();
+        const totalRooms = await roomModel.countDocuments();
+        const totalTenants = await tenantModel.countDocuments();
 
-        const pendingComplaints= await complaintModel.countDocuments({
-            status:"pending",
+        const pendingComplaints = await complaintModel.countDocuments({
+            status: "pending",
         });
 
-        const rooms= await  roomModel.find();
+        const rooms = await roomModel.find();
 
-        let totalBeds=0;
-        let occupiedBeds=0;
+        let totalBeds = 0;
+        let occupiedBeds = 0;
 
-        rooms.forEach(room=>{
-            totalBeds +=room.totalBeds;
-            occupiedBeds+=room.occupiedBeds;
+        rooms.forEach(room => {
+            totalBeds += room.totalBeds;
+            occupiedBeds += room.occupiedBeds;
         })
 
-        const availableBeds=totalBeds-occupiedBeds;
+        // const availableBeds=totalBeds-occupiedBeds;
 
         //! Revanue State 
 
-        const payments= await paymentModel.find();
+        const payments = await paymentModel.find();
 
-        let monthlyRent=0;
-        let pendingRent=0;
+        let monthlyRent = 0;
+        let pendingRent = 0;
 
-        payments.forEach(payment=>{
-            monthlyRent+=payment.amount;
+        payments.forEach(payment => {
+            monthlyRent += payment.amount;
 
-            if(payment.status==="pending"){
-                pendingRent+=payment.amount;
+            if (payment.status === "pending") {
+                pendingRent += payment.amount;
             }
         })
 
@@ -47,7 +47,7 @@ export const getDashboardStats = async (req, res) => {
         res.json({
             totalRooms,
             totalTenants,
-            availableBeds,
+            occupiedBeds,
             pendingComplaints,
             monthlyRent,
             pendingRent

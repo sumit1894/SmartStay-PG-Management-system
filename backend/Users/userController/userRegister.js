@@ -3,6 +3,8 @@ import userModel from "../userModel/userModel.js";
 
 
 
+
+
 export const register = async (req, res) => {
     try {
 
@@ -25,6 +27,7 @@ export const register = async (req, res) => {
 
         await user.save();
         res.json({ success: true, message: "User Registered Successfully" })
+
 
 
     } catch (error) {

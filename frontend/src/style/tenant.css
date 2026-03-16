@@ -1,0 +1,100 @@
+/* Page Layout */
+
+.tenants-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+}
+
+.tenants-container h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Form Styling */
+
+.tenant-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.tenant-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 180px;
+  font-size: 14px;
+}
+
+.tenant-form input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+/* Button */
+
+.add-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.add-btn:hover {
+  background: #4338ca;
+}
+
+/* Table */
+
+.tenants-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.tenants-table th {
+  background: #f5f6fa;
+  text-align: left;
+  padding: 12px;
+  font-weight: 600;
+}
+
+.tenants-table td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+/* Row hover */
+
+.tenants-table tbody tr:hover {
+  background: #f9fafc;
+}
+
+/* Delete button */
+
+.delete-btn {
+  background: #ef4444;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* Empty state */
+
+.empty-row {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+}

@@ -11,12 +11,11 @@ const tenantSchema = new mongoose.Schema(
             type: String,
             require: true
         },
-        roomId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Room",
-            require: true
+        roomNumber: {
+            type: String,
+            required: true
         },
-        rentAmount: {
+        rent: {
             type: Number,
             required: true
         },

@@ -1,0 +1,33 @@
+.Dashboard-header {
+  margin: 10px;
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.topbar {
+  height: 60px;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  /* margin-left: 220px; */
+}
+
+.profile button {
+  margin: 10px;
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
