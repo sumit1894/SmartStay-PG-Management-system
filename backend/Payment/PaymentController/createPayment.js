@@ -4,21 +4,30 @@ import paymentModel from "../PaymentModel/paymentModel.js";
 export const uploadPayment = async (req, res) => {
     try {
 
-        const { tenantId, amount, transactionId } = req.body;
+        const { tenantId, amount, roomNumber } = req.body;
 
-        const existingPayment = await paymentModel.findOne({ transactionId });
+        const month = new Date().getMonth() + 1;
+        const year = new Date().getFullYear();
 
-        if (existingPayment) {
+        const existingPayment = await paymentModel.findOne({
+            tenantId,
+            month,
+            year
+        });
+
+         if (existingPayment) {
             return res.status(400).json({
-                message: "Transaction already exists"
+                message: "Rent already paid for this month"
             });
-        };
+        }
 
         const payment = new paymentModel({
             tenantId,
+            roomNumber,
             amount,
-            transactionId,
-            status: "pending"
+            month,
+            year,
+            status: "paid"
         })
 
         await payment.save();
@@ -31,6 +40,7 @@ export const uploadPayment = async (req, res) => {
 
 
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ message: error.message || "Server Error" });
     }
 }
+

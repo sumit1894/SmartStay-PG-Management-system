@@ -2,10 +2,13 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import "../style/rooms.css";
+import { Sidebar } from "../components/Sidebar";
+import { Topbar } from "../components/Topbar";
 
 export const Rooms = () => {
 
   const [rooms, setRooms] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const [formdata, setFormdata] = useState({
     roomNumber: "",
@@ -137,101 +140,101 @@ export const Rooms = () => {
   };
 
   return (
-    <div className="rooms-container">
+    <div className="dashboard">
 
-      <h2>Room Management</h2>
+      {/* Sidebar */}
+      <Sidebar open={open} setOpen={setOpen} />
 
-      {/* Add Room Form */}
-      <form className="room-form" onSubmit={handleSubmit}>
+      {/* Main Content */}
+      <div className="main">
 
-        <input
-          type="text"
-          name="roomNumber"
-          placeholder="Room Number"
-          value={formdata.roomNumber}
-          onChange={handleChange}
-          required
-        />
+        <Topbar toggleSidebar={() => setOpen(!open)} />
 
-        <input
-          type="number"
-          name="totalBeds"
-          placeholder="Total Beds"
-          value={formdata.totalBeds}
-          onChange={handleChange}
-          required
-        />
+        <div className="rooms-content">
+          <h2>Room Management</h2>
 
-        <input
-          type="number"
-          name="occupiedBeds"
-          placeholder="occupied Beds"
-          value={formdata.occupiedBeds}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="rent"
-          placeholder="rent"
-          value={formdata.rent}
-          onChange={handleChange}
-          required
-        />
+          {/* Form */}
+          <form className="room-form" onSubmit={handleSubmit}>
 
-        <button type="submit">
-          {editId ? "Update Room" : "Add Room"}
-        </button>
+            <input
+              type="text"
+              name="roomNumber"
+              placeholder="Room Number"
+              value={formdata.roomNumber}
+              onChange={handleChange}
+              required
+            />
 
-      </form>
+            <input
+              type="number"
+              name="totalBeds"
+              placeholder="Total Beds"
+              value={formdata.totalBeds}
+              onChange={handleChange}
+              required
+            />
 
-      {/* Rooms Table */}
+            <input
+              type="number"
+              name="occupiedBeds"
+              placeholder="Occupied Beds"
+              value={formdata.occupiedBeds}
+              onChange={handleChange}
+              required
+            />
 
-      <table border="1" cellPadding="10">
+            <input
+              type="number"
+              name="rent"
+              placeholder="Rent"
+              value={formdata.rent}
+              onChange={handleChange}
+              required
+            />
 
-        <thead>
-          <tr>
-            <th>Room</th>
-            <th>Total Beds</th>
-            <th>occupied Beds</th>
-            <th>Rent</th>
-            <th>Action</th>
-          </tr>
-        </thead>
+            <button type="submit">
+              {editId ? "Update Room" : "Add Room"}
+            </button>
 
-        <tbody>
+          </form>
 
-          {rooms.length === 0 ? (
-            <tr>
-              <td colSpan="4">No Rooms Found</td>
-            </tr>
-          ) : (
-
-            rooms.map((room) => (
-              <tr key={room._id}>
-
-                <td>{room.roomNumber}</td>
-                <td>{room.totalBeds}</td>
-                <td>{room.occupiedBeds}</td>
-                <td>{room.rent}</td>
-
-                <td>
-                  <button onClick={() => deleteRoom(room._id)}>
-                    Delete
-                  </button>
-
-                  <button onClick={() => handleEdit(room)}>Edit</button>
-                </td>
-
+          {/* Table */}
+          <table className="room-table">
+            <thead>
+              <tr>
+                <th>Room</th>
+                <th>Total Beds</th>
+                <th>Occupied</th>
+                <th>Rent</th>
+                <th>Action</th>
               </tr>
-            ))
+            </thead>
 
-          )}
+            <tbody>
+              {rooms.length === 0 ? (
+                <tr>
+                  <td colSpan="5">No Rooms Found</td>
+                </tr>
+              ) : (
+                rooms.map((room) => (
+                  <tr key={room._id}>
+                    <td>{room.roomNumber}</td>
+                    <td>{room.totalBeds}</td>
+                    <td>{room.occupiedBeds}</td>
+                    <td>₹{room.rent}</td>
 
-        </tbody>
+                    <td>
+                      <button onClick={() => handleEdit(room)}>Edit</button>
+                      <button onClick={() => deleteRoom(room._id)}>Delete</button>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
 
-      </table>
-
+        </div>
+      </div>
     </div>
   );
 };

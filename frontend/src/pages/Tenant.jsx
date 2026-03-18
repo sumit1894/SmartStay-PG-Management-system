@@ -2,10 +2,20 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import "../style/tenant.css"
+import { Topbar } from "../components/Topbar";
+import { Sidebar } from "../components/Sidebar";
 
 export const Tenants = () => {
 
     const [tenants, setTenants] = useState([]);
+    const [search, setSearch] = useState("");
+    const [open, setOpen] = useState(false);
+
+    // ! search
+    const filterTenants = tenants.filter((t) =>
+        t.name.toLowerCase().includes(search.toLowerCase()) ||
+        t.roomNumber.toLowerCase().includes(search.toLowerCase())
+    );
 
     const [form, setForm] = useState({
         name: "",
@@ -32,7 +42,7 @@ export const Tenants = () => {
                 }
             });
             toast.success(res.data.message);
-            
+
             setForm({
                 name: "",
                 phone: "",
@@ -81,68 +91,84 @@ export const Tenants = () => {
     }, []);
 
     return (
-        <div className="tenants-container">
+        <div className="dashboard">
 
-            <h2>Add Tenant</h2>
+            {/* Sidebar */}
+            <Sidebar open={open} setOpen={setOpen} />
 
-            <form className="tenant-form" onSubmit={addTenant}>
+            {/* Main Content */}
+            <div className="main">
 
-                <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
-                <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
-                <input name="roomNumber" placeholder="Room Number" value={form.roomNumber} onChange={handleChange} />
-                <input name="rent" placeholder="Rent" value={form.rent} onChange={handleChange} />
+                <Topbar toggleSidebar={() => setOpen(!open)} />
 
-                <button className="add-btn" type="submit">Add Tenant</button>
+                <div className="tenants-content">
 
-            </form>
+                    <h2>Tenant Management</h2>
 
-            <h2>Tenants List</h2>
+                    {/* Form */}
+                    <form className="tenant-form" onSubmit={addTenant}>
 
-            <table className="tenants-table">
+                        <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
+                        <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
+                        <input name="roomNumber" placeholder="Room Number" value={form.roomNumber} onChange={handleChange} />
+                        <input name="rent" placeholder="Rent" value={form.rent} onChange={handleChange} />
 
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Room</th>
-                        <th>Rent</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
+                        <button className="add-btn" type="submit">Add Tenant</button>
 
-                <tbody>
+                    </form>
 
-                    {tenants.length === 0 ? (
-                        <tr>
-                            <td colSpan="5" className="empty-row">No Tenants Found</td>
-                        </tr>
-                    ) : (
+                    {/* Search */}
+                    <input
+                        className="search-input"
+                        type="text"
+                        placeholder="Search by name or room..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
 
-                        tenants.map((tenant) => (
-                            <tr key={tenant._id}>
-                                <td>{tenant.name}</td>
-                                <td>{tenant.roomNumber}</td>
-                                <td>{tenant.rent}</td>
-                                <td>{tenant.phone}</td>
+                    {/* Table */}
+                    <table className="tenants-table">
 
-                                <td>
-                                    <button
-                                        className="delete-btn"
-                                        onClick={() => deleteTenant(tenant._id)}
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Room</th>
+                                <th>Rent</th>
+                                <th>Phone</th>
+                                <th>Action</th>
                             </tr>
-                        ))
+                        </thead>
 
-                    )}
+                        <tbody>
+                            {filterTenants.length === 0 ? (
+                                <tr>
+                                    <td colSpan="5" className="empty-row">No Tenants Found</td>
+                                </tr>
+                            ) : (
+                                filterTenants.map((tenant) => (
+                                    <tr key={tenant._id}>
+                                        <td data-label="Name"><span>{tenant.name}</span></td>
+                                        <td data-label="Room"><span>{tenant.roomNumber}</span></td>
+                                        <td data-label="Rent"><span>₹{tenant.rent}</span></td>
+                                        <td data-label="Phone"><span>{tenant.phone}</span></td>
 
-                </tbody>
+                                        <td data-label="Action">
+                                            <button
+                                                className="delete-btn"
+                                                onClick={() => deleteTenant(tenant._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
 
-            </table>
+                    </table>
 
+                </div>
+            </div>
         </div>
     );
 };

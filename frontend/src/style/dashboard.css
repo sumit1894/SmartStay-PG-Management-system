@@ -1,39 +1,247 @@
+/* Main Layout */
 .main-content {
-  margin-left: 220px;
+    margin-left: 220px;
+    padding: 20px 30px;
+    background: #f4f7fb;
+    min-height: 100vh;
 }
 
-.dashboard {
-  padding: 30px;
-}
-
+/* Dashboard Title */
 .dashboard h1 {
-  margin: 10px;
-  background: #1f2937;
-  color: #f3f4f6;
-  padding: 5px;
-  border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  width: 200px;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #1e293b;
 }
+
+/* ===================== */
+/* Cards Section */
+/* ===================== */
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
 }
 
+/* Card */
 .card {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  text-align: center;
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
+.card:hover {
+    transform: translateY(-6px);
+}
+
+/* Card Title */
+.card h3 {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+/* Card Value */
 .card p {
-  font-size: 24px;
-  font-weight: bold;
+    font-size: 26px;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+/* ===================== */
+/* Icon Styling */
+/* ===================== */
+
+.icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+/* Icon Colors */
+.icon.blue {
+    color: #2563eb;
+}
+
+.icon.green {
+    color: #16a34a;
+}
+
+.icon.red {
+    color: #dc2626;
+}
+
+.icon.orange {
+    color: #f59e0b;
+}
+
+.icon.purple {
+    color: #7c3aed;
+}
+
+/* ===================== */
+/* Special Cards */
+/* ===================== */
+
+.card.pending p {
+    color: #dc2626;
+}
+
+.card.success p {
+    color: #16a34a;
+}
+
+/* ===================== */
+/* Actions Section */
+/* ===================== */
+
+.actions {
+    margin-top: 35px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Button Colors */
+.green-btn {
+    background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.yellow-btn {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.red-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Hover Effect */
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* ===================== */
+/* Info Box */
+/* ===================== */
+
+.info-box {
+    margin-top: 40px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+}
+
+.info-box h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.info-box p {
+    font-size: 14px;
+    color: #475569;
+}
+
+/* ===================== */
+/* Responsive */
+/* ===================== */
+@media (max-width: 768px) {
+
+    /* ===================== */
+    /* Layout */
+    /* ===================== */
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    /* ===================== */
+    /* Title */
+    /* ===================== */
+
+    .dashboard h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* ===================== */
+    /* Cards */
+    /* ===================== */
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 16px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card p {
+        font-size: 22px;
+    }
+
+    .icon {
+        font-size: 20px;
+    }
+
+    /* ===================== */
+    /* Actions (IMPORTANT FIX) */
+    /* ===================== */
+
+    .actions {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    /* ===================== */
+    /* Info Box */
+    /* ===================== */
+
+    .info-box {
+        margin-top: 25px;
+        padding: 15px;
+    }
+
+    .info-box h2 {
+        font-size: 16px;
+    }
+
+    .info-box p {
+        font-size: 13px;
+    }
 }

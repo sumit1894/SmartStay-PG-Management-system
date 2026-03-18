@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import { Dashboard } from "./pages/Dashboard";
 import { Rooms } from "./pages/Room";
 import { Tenants } from "./pages/Tenant";
+import { Payments } from "./pages/Payments";
 
 
 export const App = () => {
@@ -17,6 +18,7 @@ export const App = () => {
         <Route path="/" element={<Dashboard />} />
         <Route path="/rooms" element={<Rooms/>} />
         <Route path="/tenants" element={<Tenants/>}/>
+        <Route path="/payments" element={<Payments/>} />
       </Routes>
     </>
   )

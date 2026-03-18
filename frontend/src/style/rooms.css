@@ -1,103 +1,194 @@
-.rooms-container {
-  padding: 30px;
-  font-family: Arial, Helvetica, sans-serif;
+/* ===================== */
+/* Main Content */
+/* ===================== */
+
+.main {
+    margin-left: 220px;
+    padding: 20px;
+    width: calc(100% - 220px);
+    background: #f4f7fb;
+    min-height: 100vh;
 }
 
-/* Title */
+/* ===================== */
+/* Content Wrapper */
+/* ===================== */
 
-.rooms-container h2 {
-  margin-bottom: 20px;
-  color: #333;
+.rooms-content {
+    max-width: 1100px;
+    margin: auto;
 }
 
+.rooms-content h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+/* ===================== */
 /* Form */
+/* ===================== */
 
 .room-form {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+
+    margin-bottom: 20px;
 }
 
 .room-form input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  outline: none;
-  min-width: 150px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    font-size: 14px;
+    outline: none;
 }
 
 .room-form input:focus {
-  border-color: #4CAF50;
+    border-color: #2563eb;
 }
 
-/* Add Room Button */
-
+/* Button */
 .room-form button {
-  padding: 10px 18px;
-  border: none;
-  background: #4CAF50;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #16a34a;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .room-form button:hover {
-  background: #43a047;
+    background: #15803d;
 }
 
+/* ===================== */
 /* Table */
+/* ===================== */
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
+.room-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-table thead {
-  background: #f5f5f5;
+/* Header */
+.room-table thead {
+    background: #f1f5f9;
 }
 
-table th {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 2px solid #ddd;
+.room-table th {
+    text-align: left;
+    padding: 12px;
+    font-size: 13px;
+    color: #64748b;
 }
 
-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eee;
+/* Rows */
+.room-table tbody tr {
+    border-top: 1px solid #e2e8f0;
 }
 
+.room-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* Cells */
+.room-table td {
+    padding: 12px;
+    font-size: 13px;
+    color: #1e293b;
+}
+
+/* ===================== */
 /* Buttons */
+/* ===================== */
 
-table button {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.room-table td button {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 5px;
 }
 
-/* Delete Button */
-
-table button:first-child {
-  background: #e53935;
-  color: white;
-  margin-right: 8px;
+/* Edit */
+.room-table td button:first-child {
+    background: #2563eb;
+    color: white;
 }
 
-table button:first-child:hover {
-  background: #c62828;
+/* Delete */
+.room-table td button:last-child {
+    background: #ef4444;
+    color: white;
 }
 
-/* Edit Button */
+/* ===================== */
+/* Empty */
+/* ===================== */
 
-table button:last-child {
-  background: #1976d2;
-  color: white;
+.room-table td[colspan] {
+    text-align: center;
+    padding: 15px;
+    color: #64748b;
 }
 
-table button:last-child:hover {
-  background: #1565c0;
+/* ===================== */
+/* Responsive */
+/* ===================== */
+
+@media (max-width: 768px) {
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 15px;
+        padding-top: 60px;
+    }
+
+    .rooms-content {
+        max-width: 100%;
+    }
+
+    .rooms-content h2 {
+        font-size: 18px;
+    }
+
+    /* Form */
+    .room-form {
+        grid-template-columns: 1fr;
+    }
+
+    /* Table scroll (keep table structure) */
+    .room-table {
+        /* display: block; */
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .room-table th,
+    .room-table td {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 430px) {
+    .room-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }

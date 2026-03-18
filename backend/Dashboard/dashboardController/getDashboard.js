@@ -12,7 +12,7 @@ export const getDashboardStats = async (req, res) => {
         const totalTenants = await tenantModel.countDocuments();
 
         const pendingComplaints = await complaintModel.countDocuments({
-            status: "pending",
+            status: "Pending",
         });
 
         const rooms = await roomModel.find();
@@ -25,7 +25,7 @@ export const getDashboardStats = async (req, res) => {
             occupiedBeds += room.occupiedBeds;
         })
 
-        // const availableBeds=totalBeds-occupiedBeds;
+        const vacantBeds=totalBeds-occupiedBeds;
 
         //! Revanue State 
 
@@ -36,8 +36,9 @@ export const getDashboardStats = async (req, res) => {
 
         payments.forEach(payment => {
             monthlyRent += payment.amount;
+            console.log(payment.status);
 
-            if (payment.status === "pending") {
+            if (payment.status === "Pending" && payment.status === "Pending") {
                 pendingRent += payment.amount;
             }
         })
@@ -50,7 +51,8 @@ export const getDashboardStats = async (req, res) => {
             occupiedBeds,
             pendingComplaints,
             monthlyRent,
-            pendingRent
+            pendingRent,
+            vacantBeds
         })
 
 

@@ -1,0 +1,211 @@
+/* ===================== */
+/* Title */
+/* ===================== */
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+/* ===================== */
+/* Filter Button */
+/* ===================== */
+
+.payment-actions {
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.3);
+}
+
+/* ===================== */
+/* Table */
+/* ===================== */
+
+.payment-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.payment-table thead {
+    background: #f1f5f9;
+}
+
+.payment-table th {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.payment-table td {
+    padding: 14px 16px;
+    font-size: 14px;
+    color: #1e293b;
+}
+
+.payment-table tbody tr {
+    border-top: 1px solid #e2e8f0;
+}
+
+.payment-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* ===================== */
+/* Status Badge */
+/* ===================== */
+
+.status {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status.paid {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status.pending {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ===================== */
+/* Button */
+/* ===================== */
+
+.pay-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #16a34a;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.pay-btn:hover {
+    background: #15803d;
+}
+
+/* ===================== */
+/* Empty */
+/* ===================== */
+
+.empty-row {
+    text-align: center;
+    padding: 20px;
+    color: #64748b;
+}
+
+/* ===================== */
+/* Responsive */
+/* ===================== */
+@media (max-width: 768px) {
+
+    /* Layout spacing */
+    .main-content {
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .filter-btn {
+        width: 100%;
+    }
+
+    /* ===================== */
+    /* TABLE → CARD UI */
+/* ===================== */
+
+    .payment-table,
+    .payment-table thead,
+    .payment-table tbody,
+    .payment-table th,
+    .payment-table td,
+    .payment-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    .payment-table thead {
+        display: none;
+    }
+
+    /* Card */
+    .payment-table tbody tr {
+        margin-bottom: 15px;
+        padding: 14px;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* Row */
+    .payment-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
+        font-size: 13px;
+    }
+
+    .payment-table td:last-child {
+        border-bottom: none;
+    }
+
+    /* Label */
+    .payment-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #64748b;
+        font-size: 12px;
+    }
+
+    /* Value */
+    .payment-table td span {
+        font-weight: 500;
+        color: #1e293b;
+        text-align: right;
+    }
+
+    /* Status badge fix */
+    .status {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    /* Button */
+    .pay-btn {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 13px;
+    }
+}

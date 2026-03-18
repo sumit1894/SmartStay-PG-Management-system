@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.post("/payment", authMiddleware, uploadPayment);
 router.get("/get-all-payment",authMiddleware,getAllPayments);
+
 router.get("/payment-by-tenant/:tenantId",authMiddleware,getPaymentByTenant);
 router.patch("/update-payment-status/:id",authMiddleware,updatePaymentStatus);
 router.get("/get-paid-unpaid-payment",authMiddleware,getPaymentsDashboard);
