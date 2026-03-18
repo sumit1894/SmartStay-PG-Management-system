@@ -4,23 +4,32 @@ import toast from "react-hot-toast";
 import { Topbar } from "../components/Topbar";
 import { Sidebar } from "../components/Sidebar";
 import "../style/payment.css"
+import Loader from "../components/Loading";
 
 export const Payments = () => {
 
     const [payments, setPayments] = useState([]);
     const [showUnpaid, setShowUnpaid] = useState(false);
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true); // ✅ loading state
+
 
 
     const fetchPayments = async () => {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/auth/get-all-payment",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-        setPayments(res.data);
+        try {
+            const token = localStorage.getItem("token");
+            const res = await axios.get("http://localhost:5000/api/auth/get-all-payment",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+            setPayments(res.data);
+        } catch (error) {
+            toast.message("something Error")
+        }finally{
+            setLoading(false)
+        }
 
     };
 
@@ -55,6 +64,9 @@ export const Payments = () => {
         ? payments.filter(t => t.status === "Pending")
         : payments;
 
+    if (loading) {
+        return <Loader text="Loading Payment..." />
+    }
     return (
         <>
             <Sidebar open={open} setOpen={setOpen} />

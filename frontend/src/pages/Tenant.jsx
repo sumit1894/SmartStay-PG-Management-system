@@ -4,12 +4,15 @@ import toast from "react-hot-toast";
 import "../style/tenant.css"
 import { Topbar } from "../components/Topbar";
 import { Sidebar } from "../components/Sidebar";
+import Loader from "../components/Loading";
 
 export const Tenants = () => {
 
     const [tenants, setTenants] = useState([]);
     const [search, setSearch] = useState("");
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true); // ✅ loading state
+
 
     // ! search
     const filterTenants = tenants.filter((t) =>
@@ -52,7 +55,7 @@ export const Tenants = () => {
             getTenants();
         } catch (error) {
             toast.error(error.response?.data?.message || "Not Added");
-        }
+        } 
     };
 
     const getTenants = async () => {
@@ -67,6 +70,8 @@ export const Tenants = () => {
         } catch (error) {
             toast.error(error.response?.data?.message);
 
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -89,6 +94,10 @@ export const Tenants = () => {
     useEffect(() => {
         getTenants();
     }, []);
+
+        if (loading) {
+        return <Loader text="Loading Tenants..." />
+    }
 
     return (
         <div className="dashboard">

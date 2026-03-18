@@ -9,8 +9,18 @@ import {
 
 import "../style/sidebar.css";
 
-export const Sidebar = ({ open, setOpen }) => {
+import { useNavigate } from "react-router-dom";
 
+
+
+export const Sidebar = ({ open, setOpen }) => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+        toast.success("Logged out");
+    };
     return (
         <>
             {/* Overlay (mobile) */}
@@ -50,8 +60,10 @@ export const Sidebar = ({ open, setOpen }) => {
                         </NavLink>
                     </li>
 
-                    <li>
-                        <NavLink to="/logout" onClick={() => setOpen(false)}>
+                    <li onClick={handleLogout}>
+                        <NavLink  onClick={() =>{
+                            setOpen(false)
+                        }}>
                             <FaSignOutAlt className="nav-icon" />
                             Logout
                         </NavLink>

@@ -1,4 +1,3 @@
-import complaintModel from "../../Complaint/complaintModel/complaintModel.js";
 import paymentModel from "../../Payment/PaymentModel/paymentModel.js";
 import roomModel from "../../Rooms/roomModel/roomModel.js";
 import tenantModel from "../../Tenant/tenantModel/tenantModel.js";
@@ -11,9 +10,12 @@ export const getDashboardStats = async (req, res) => {
         const totalRooms = await roomModel.countDocuments();
         const totalTenants = await tenantModel.countDocuments();
 
-        const pendingComplaints = await complaintModel.countDocuments({
-            status: "Pending",
+        const paidPayment = await paymentModel.countDocuments({
+            status: "paid",
         });
+
+        //! pending rent tenants
+        const pendingComplaints=totalTenants-paidPayment;
 
         const rooms = await roomModel.find();
 

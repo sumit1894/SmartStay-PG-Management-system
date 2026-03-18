@@ -1,3 +1,4 @@
+import paymentModel from "../../Payment/PaymentModel/paymentModel.js";
 import roomModel from "../../Rooms/roomModel/roomModel.js";
 import tenantModel from "../tenantModel/tenantModel.js";
 
@@ -19,8 +20,10 @@ export const deleteTenant = async (req, res) => {
             room.occupiedBeds -= 1;
             await room.save();
         }
-
+        
         await tenantModel.findByIdAndDelete(req.params.id);
+
+        const paymentUser=await paymentModel.find({roomNumber: tenant.roomNumber})
 
         res.status(200).json({
             success: true,

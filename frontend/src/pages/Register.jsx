@@ -3,6 +3,7 @@ import "../style/register.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import toast from 'react-hot-toast';
+import Loader from "../components/Loading";
 
 
 export const Register = () => {
@@ -13,6 +14,7 @@ export const Register = () => {
         password: "",
         confirmPassword: ""
     });
+
 
     const handleChange = (e) => {
         setFormData({
@@ -45,8 +47,10 @@ export const Register = () => {
 
         } catch (error) {
             toast.error(error.response?.data?.message || "Registration failed");
-        }
+        } 
     };
+
+
 
     return (
         <div className="register-page">

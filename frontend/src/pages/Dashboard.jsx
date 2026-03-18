@@ -6,6 +6,8 @@ import "../style/dashboard.css";
 import { Sidebar } from "../components/Sidebar";
 import { Topbar } from "../components/Topbar";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -20,8 +22,10 @@ import {
     FaUserPlus,
     FaPlusSquare
 } from "react-icons/fa";
+import Loader from "../components/Loading";
 
 export const Dashboard = () => {
+    const navigate = useNavigate();
 
     const [stats, setStats] = useState({
         totalRooms: 0,
@@ -33,13 +37,26 @@ export const Dashboard = () => {
         pendingRent: 0
     });
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(true); // ✅ loading state
 
     const fetchDashBoard = async () => {
+
         try {
-            const res = await axios.get("http://localhost:5000/api/auth/get-dashboard");
+
+            const token = localStorage.getItem("token");
+            const res = await axios.get("http://localhost:5000/api/auth/get-dashboard",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
             setStats(res.data);
         } catch (error) {
-            toast.error("Server Error");
+            toast.error("Unauthorized or Server Error");
+            navigate("/login");
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -47,6 +64,10 @@ export const Dashboard = () => {
         fetchDashBoard();
     }, []);
 
+
+    if (loading) {
+        return <Loader text="Loading Dashboard..." />
+    }
     return (
         <>
             <Sidebar open={open} setOpen={setOpen} />
@@ -93,8 +114,8 @@ export const Dashboard = () => {
 
                         <div className="card pending">
                             <FaExclamationCircle className="icon red" />
-                            <h3>Pending Rent</h3>
-                            <p>₹ {stats.pendingRent}</p>
+                            <h3>Pending Rent Tenants</h3>
+                            <p>{stats.pendingComplaints}</p>
                         </div>
 
                     </div>

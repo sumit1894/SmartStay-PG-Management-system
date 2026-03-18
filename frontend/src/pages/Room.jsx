@@ -4,11 +4,14 @@ import toast from "react-hot-toast";
 import "../style/rooms.css";
 import { Sidebar } from "../components/Sidebar";
 import { Topbar } from "../components/Topbar";
+import Loader from "../components/Loading";
 
 export const Rooms = () => {
 
   const [rooms, setRooms] = useState([]);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true); // ✅ loading state
+
 
   const [formdata, setFormdata] = useState({
     roomNumber: "",
@@ -55,6 +58,8 @@ export const Rooms = () => {
       setRooms(res.data.rooms);
     } catch (error) {
       toast.message(toast.error(error.response?.data?.message || "Server Error"));
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -115,9 +120,14 @@ export const Rooms = () => {
 
     } catch (error) {
       toast.error(error.response?.data?.message || "Error");
+    } finally {
+      setLoading(false)
     }
   };
 
+  if (loading) {
+    return <Loader text="Loading Rooms..." />
+  }
   // Delete room
   const deleteRoom = async (id) => {
     try {

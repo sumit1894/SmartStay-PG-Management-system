@@ -6,6 +6,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { Rooms } from "./pages/Room";
 import { Tenants } from "./pages/Tenant";
 import { Payments } from "./pages/Payments";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 
 export const App = () => {
@@ -15,10 +16,10 @@ export const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/rooms" element={<Rooms/>} />
-        <Route path="/tenants" element={<Tenants/>}/>
-        <Route path="/payments" element={<Payments/>} />
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/rooms" element={<ProtectedRoute><Rooms /></ProtectedRoute>} />
+        <Route path="/tenants" element={<ProtectedRoute><Tenants /></ProtectedRoute>} />
+        <Route path="/payments" element={<ProtectedRoute><Payments /></ProtectedRoute>} />
       </Routes>
     </>
   )

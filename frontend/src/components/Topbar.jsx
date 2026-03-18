@@ -1,7 +1,18 @@
 import { FaBars } from "react-icons/fa";
 import "../style/topbar.css";
+import {useNavigate} from "react-router-dom"
+
+
 
 export const Topbar = ({ toggleSidebar }) => {
+    const navigate=useNavigate();
+
+    const handleLogout=()=>{
+        localStorage.removeItem("token");
+        navigate("/login")
+        toast.success("Logged out");
+
+    }
     return (
         <div className="topbar">
 
@@ -15,7 +26,7 @@ export const Topbar = ({ toggleSidebar }) => {
 
             <div className="profile">
                 <span>Admin</span>
-                <button>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
             </div>
 
         </div>
