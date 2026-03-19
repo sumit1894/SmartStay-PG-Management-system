@@ -10,13 +10,23 @@ import { getDashboardStats } from "./Dashboard/dashboardController/getDashboard.
 const app = express();
 import cors from "cors"
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://spstacksmartpg.netlify.app"
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://your-netlify-app.netlify.app"
-  ],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
-}))
+}));
+
+
 app.use(express.json());
 
 app.use("/api/auth", userAuthRoute);
