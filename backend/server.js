@@ -8,15 +8,14 @@ import paymentRoute from "./Payment/PaymentRoutes/PaymentRoute.js";
 import { getDashboardStats } from "./Dashboard/dashboardController/getDashboard.js";
 
 const app = express();
-import cors from "cors"
-
+import cors from "cors";
 
 app.use(cors({
-  origin: true,
-  credentials: true
+  origin: [
+    "http://localhost:5173",
+    "https://spstacksmartpg.netlify.app"
+  ]
 }));
-
-
 app.use(express.json());
 
 app.use("/api/auth", userAuthRoute);
