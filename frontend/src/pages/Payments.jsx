@@ -18,7 +18,7 @@ export const Payments = () => {
     const fetchPayments = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:5000/api/auth/get-all-payment",
+            const res = await axios.get("https://smartstay-backend-b74w.onrender.com/api/auth/get-all-payment",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -27,7 +27,7 @@ export const Payments = () => {
             setPayments(res.data);
         } catch (error) {
             toast.message("something Error")
-        }finally{
+        } finally {
             setLoading(false)
         }
 
@@ -40,7 +40,7 @@ export const Payments = () => {
     const markPaid = async (tenant) => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.post("http://localhost:5000/api/auth/payment",
+            const res = await axios.post("https://smartstay-backend-b74w.onrender.com/api/auth/payment",
 
                 {
                     tenantId: tenant.tenantId,

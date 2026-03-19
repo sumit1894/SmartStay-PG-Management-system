@@ -24,7 +24,7 @@ export const Tenants = () => {
         name: "",
         phone: "",
         roomNumber: "",
-        aadhar:"",
+        aadhar: "",
         rent: ""
     });
 
@@ -40,7 +40,7 @@ export const Tenants = () => {
             e.preventDefault();
             const token = localStorage.getItem("token");
 
-            const res = await axios.post("http://localhost:5000/api/auth/create-tenant", form, {
+            const res = await axios.post("https://smartstay-backend-b74w.onrender.com/api/auth/create-tenant", form, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -51,19 +51,19 @@ export const Tenants = () => {
                 name: "",
                 phone: "",
                 roomNumber: "",
-                aadhar:"",
+                aadhar: "",
                 rent: ""
             })
             getTenants();
         } catch (error) {
             toast.error(error.response?.data?.message || "Not Added");
-        } 
+        }
     };
 
     const getTenants = async () => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:5000/api/auth/get-all-tenant", {
+            const res = await axios.get("https://smartstay-backend-b74w.onrender.com/api/auth/get-all-tenant", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -81,7 +81,7 @@ export const Tenants = () => {
     const deleteTenant = async (id) => {
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.delete(`http://localhost:5000/api/auth/delete-tenant/${id}`, {
+            const res = await axios.delete(`https://smartstay-backend-b74w.onrender.com/api/auth/delete-tenant/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -97,7 +97,7 @@ export const Tenants = () => {
         getTenants();
     }, []);
 
-        if (loading) {
+    if (loading) {
         return <Loader text="Loading Tenants..." />
     }
 

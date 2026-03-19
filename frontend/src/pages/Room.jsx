@@ -48,7 +48,7 @@ export const Rooms = () => {
   const fetchRooms = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:5000/api/auth/all-room",
+      const res = await axios.get("https://smartstay-backend-b74w.onrender.com/api/auth/all-room",
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -81,7 +81,7 @@ export const Rooms = () => {
       if (editId) {
 
         const res = await axios.put(
-          `http://localhost:5000/api/auth/update-room/${editId}`,
+          `https://smartstay-backend-b74w.onrender.com/api/auth/update-room/${editId}`,
           formdata,
           {
             headers: {
@@ -95,7 +95,7 @@ export const Rooms = () => {
       } else {
 
         const res = await axios.post(
-          "http://localhost:5000/api/auth/create-room",
+          "https://smartstay-backend-b74w.onrender.com/api/auth/create-room",
           formdata,
           {
             headers: {
@@ -132,7 +132,7 @@ export const Rooms = () => {
   const deleteRoom = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/auth/delete-room/${id}`,
+      await axios.delete(`https://smartstay-backend-b74w.onrender.com/api/auth/delete-room/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`

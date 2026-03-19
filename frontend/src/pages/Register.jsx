@@ -3,7 +3,6 @@ import "../style/register.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import toast from 'react-hot-toast';
-import Loader from "../components/Loading";
 
 
 export const Register = () => {
@@ -36,7 +35,7 @@ export const Register = () => {
 
         try {
             const res = await axios.post(
-                "http://localhost:5000/api/auth/register",
+                "https://smartstay-backend-b74w.onrender.com/api/auth/register",
                 {
                     name: formdata.name,
                     email: formdata.email,
@@ -47,7 +46,7 @@ export const Register = () => {
 
         } catch (error) {
             toast.error(error.response?.data?.message || "Registration failed");
-        } 
+        }
     };
 
 

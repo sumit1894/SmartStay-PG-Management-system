@@ -12,9 +12,9 @@ import cors from "cors"
 
 app.use(cors({
   origin: [
-  "http://localhost:5173",
-  "https://your-netlify-app.netlify.app"
-],
+    "http://localhost:5173",
+    "https://your-netlify-app.netlify.app"
+  ],
   credentials: true
 }))
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use("/api/auth", getDashboardStats);
 
 
 // app.listen(5000, () => {
-//   console.log("Server running on http://localhost:5000");
+//   console.log("Server running on https://smartstay-backend-b74w.onrender.com");
 // });
 
 const PORT = process.env.PORT || 5000;

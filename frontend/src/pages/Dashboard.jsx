@@ -44,7 +44,7 @@ export const Dashboard = () => {
         try {
 
             const token = localStorage.getItem("token");
-            const res = await axios.get("http://localhost:5000/api/auth/get-dashboard",
+            const res = await axios.get("https://smartstay-backend-b74w.onrender.com/api/auth/get-dashboard",
                 {
                     headers: {
                         Authorization: `Bearer ${token}`
