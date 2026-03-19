@@ -14,6 +14,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "https://spstacksmartpg.netlify.app"
 ];
+console.log("NEW DEPLOY CHECK");
 
 app.use(cors({
   origin: function (origin, callback) {
