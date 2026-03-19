@@ -11,7 +11,10 @@ const app = express();
 import cors from "cors"
 
 app.use(cors({
-  origin: "https://your-netlify-app.netlify.app",
+  origin: [
+  "http://localhost:5173",
+  "https://your-netlify-app.netlify.app"
+],
   credentials: true
 }))
 app.use(express.json());
