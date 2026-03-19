@@ -24,6 +24,7 @@ export const Tenants = () => {
         name: "",
         phone: "",
         roomNumber: "",
+        aadhar:"",
         rent: ""
     });
 
@@ -50,6 +51,7 @@ export const Tenants = () => {
                 name: "",
                 phone: "",
                 roomNumber: "",
+                aadhar:"",
                 rent: ""
             })
             getTenants();
@@ -119,6 +121,7 @@ export const Tenants = () => {
 
                         <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
                         <input name="phone" placeholder="Phone" value={form.phone} onChange={handleChange} />
+                        <input name="aadhar" placeholder="aadhar" value={form.aadhar} onChange={handleChange} />
                         <input name="roomNumber" placeholder="Room Number" value={form.roomNumber} onChange={handleChange} />
                         <input name="rent" placeholder="Rent" value={form.rent} onChange={handleChange} />
 
@@ -141,9 +144,11 @@ export const Tenants = () => {
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Aadhar</th>
                                 <th>Room</th>
                                 <th>Rent</th>
                                 <th>Phone</th>
+                                <th>Joined Date</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -154,23 +159,27 @@ export const Tenants = () => {
                                     <td colSpan="5" className="empty-row">No Tenants Found</td>
                                 </tr>
                             ) : (
-                                filterTenants.map((tenant) => (
-                                    <tr key={tenant._id}>
-                                        <td data-label="Name"><span>{tenant.name}</span></td>
-                                        <td data-label="Room"><span>{tenant.roomNumber}</span></td>
-                                        <td data-label="Rent"><span>₹{tenant.rent}</span></td>
-                                        <td data-label="Phone"><span>{tenant.phone}</span></td>
+                                filterTenants.map((tenant) => {
+                                    return (
+                                        <tr key={tenant._id}>
+                                            <td data-label="Name"><span>{tenant.name}</span></td>
+                                            <td data-label="Aadhar"><span>{tenant.aadhar}</span></td>
+                                            <td data-label="Room"><span>{tenant.roomNumber}</span></td>
+                                            <td data-label="Rent"><span>₹{tenant.rent}</span></td>
+                                            <td data-label="Phone"><span>{tenant.phone}</span></td>
+                                            <td data-label="joined Date"><span>{new Date(tenant.joinedDate).toISOString().split("T")[0]}</span></td>
 
-                                        <td data-label="Action">
-                                            <button
-                                                className="delete-btn"
-                                                onClick={() => deleteTenant(tenant._id)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))
+                                            <td data-label="Action">
+                                                <button
+                                                    className="delete-btn"
+                                                    onClick={() => deleteTenant(tenant._id)}
+                                                >
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
                             )}
                         </tbody>
 

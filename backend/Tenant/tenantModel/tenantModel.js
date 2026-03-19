@@ -19,7 +19,10 @@ const tenantSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
-
+        aadhar:{
+            type:Number,
+            required:true
+        },
         joinedDate: {
             type: Date,
             default: Date.now

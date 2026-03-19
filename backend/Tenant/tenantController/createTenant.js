@@ -4,7 +4,7 @@ import tenantModel from "../tenantModel/tenantModel.js";
 export const createTenant = async (req, res) => {
     try {
 
-        const { name, phone, roomNumber, rent } = req.body;
+        const { name, phone, roomNumber, rent,aadhar } = req.body;
 
         // find specific room
         const room = await roomModel.findOne({ roomNumber });
@@ -28,6 +28,7 @@ export const createTenant = async (req, res) => {
             name,
             phone,
             roomNumber,
+            aadhar,
             rent
         });
 
